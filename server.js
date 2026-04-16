@@ -13,6 +13,14 @@ app.use((req, res, next) => {
 const sendError = (res, status, message) =>
   res.status(status).json({ status: "error", message });
 
+// ── Root route ────────────────────────────────────────────────────────────────
+app.get("/", (req, res) => {
+  res.json({
+    status: "success",
+    message: "Welcome to the Classify API. Try /api/classify?name=john"
+  });
+});
+
 // ── GET /api/classify ─────────────────────────────────────────────────────────
 app.get("/api/classify", async (req, res) => {
   const { name } = req.query;
@@ -46,7 +54,7 @@ app.get("/api/classify", async (req, res) => {
   try {
     const upstream = await fetch(
       `https://api.genderize.io/?name=${encodeURIComponent(trimmed)}`,
-      { signal: AbortSignal.timeout(4500) }  // bump to 4.5s
+      { signal: AbortSignal.timeout(450) } // stay well under 500 ms budget
     );
 
     if (!upstream.ok) {
