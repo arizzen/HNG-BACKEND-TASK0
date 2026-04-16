@@ -17,7 +17,7 @@ const sendError = (res, status, message) =>
 app.get("/", (req, res) => {
   res.json({
     status: "success",
-    message: "Welcome to the Classify API. Try /api/classify?name=john"
+    message: "Welcome to the Classify API. Try https://hng-backend-task0-production.up.railway.app/api/classify?name=john"
   });
 });
 
